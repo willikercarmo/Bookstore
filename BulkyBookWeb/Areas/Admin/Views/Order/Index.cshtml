@@ -1,0 +1,78 @@
+﻿@section Css{
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+}
+
+@{
+    var status = Context.Request.Query["status"];
+    var peding = "text-primary";
+    var inProcess = "text-primary";
+    var completed = "text-primary";
+    var approved = "text-primary";
+    var all = "text-primary";
+
+    switch (status)
+    {
+        case "peding":
+            peding = "active text-white";
+            break;
+        case "inprocess":
+            inProcess = "active text-white";
+            break;
+        case "completed":
+            completed = "active text-white";
+            break;
+            case "approved":
+            approved = "active text-white";
+            break;
+        default:
+            all = "active text-white";
+            break;
+    }
+}
+
+<div class="p-3">
+    <div class="d-flex justify-content-between pt-4">
+        <div class="p-2">
+            <h2 class="text-primary">Order List</h2>
+        </div>
+        <div class="p-2">
+            <ul class="list-group list-group-horizontal-sm">
+                <a style="text-decoration: none;" asp-controller="Order" asp-action="Index" asp-route-status="inprocess">
+                <li class="list-group-item @inProcess">In Process</li>
+                </a>
+                <a style="text-decoration: none;" asp-controller="Order" asp-action="Index" asp-route-status="peding">
+                <li class="list-group-item @peding">Payment Peding</li>
+                </a>
+                <a style="text-decoration: none;" asp-controller="Order" asp-action="Index" asp-route-status="completed">
+                <li class="list-group-item @completed">Completed</li>
+                </a>
+                 <a style="text-decoration: none;" asp-controller="Order" asp-action="Index" asp-route-status="approved">
+                <li class="list-group-item @approved">Approved</li>
+                </a>
+                <a style="text-decoration: none;" asp-controller="Order" asp-action="Index" asp-route-status="all">
+                <li class="list-group-item @all">All</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<table id="tblData" class="table table-bordered table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Order Total</th>
+            <th></th>
+        </tr>
+    </thead>
+
+</table>
+
+@section Scripts{
+<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="~/js/order.js"></script>
+}
