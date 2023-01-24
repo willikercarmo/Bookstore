@@ -30,6 +30,9 @@ namespace BulkyBook.Web.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Category category)
         {
+            // Validate if the object is valid 
+            if (!ModelState.IsValid) return View(category);
+
             // Add the new category
             _context.Categories.Add(category);
 
