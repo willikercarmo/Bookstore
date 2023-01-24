@@ -46,6 +46,9 @@ namespace BulkyBook.Web.Controllers
             // Save the new category to database
             _context.SaveChanges();
 
+            // Add information message
+            TempData["Success"] = "Category created successfully.";
+
             // Redirect to Index action (Category list)
             return RedirectToAction("Index");
         }
@@ -93,6 +96,9 @@ namespace BulkyBook.Web.Controllers
             // Save the update category to database
             _context.SaveChanges();
 
+            // Add information message
+            TempData["Success"] = "Category updated successfully.";
+
             // Redirect to Index action (Category list)
             return RedirectToAction("Index");
         }
@@ -133,6 +139,9 @@ namespace BulkyBook.Web.Controllers
 
             // Save the removed category to database
             _context.SaveChanges();
+
+            // Add information message
+            TempData["Success"] = "Category deleted successfully.";
 
             // Redirect to Index action (Category list)
             return RedirectToAction("Index");
