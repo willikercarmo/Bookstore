@@ -87,10 +87,10 @@ namespace BulkyBook.Web.Controllers
             // Validate if the object is valid 
             if (!ModelState.IsValid) return View(category);
 
-            // Add the new category
-            _context.Categories.Add(category);
+            // Update the new category
+            _context.Categories.Update(category);
 
-            // Save the new category to database
+            // Save the update category to database
             _context.SaveChanges();
 
             // Redirect to Index action (Category list)
