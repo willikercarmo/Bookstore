@@ -24,5 +24,20 @@ namespace BulkyBook.Web.Controllers
         {
             return View();
         }
+
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Category category)
+        {
+            // Add the new category
+            _context.Categories.Add(category);
+
+            // Save the new category to database
+            _context.SaveChanges();
+
+            // Redirect to Index action (Category list)
+            return RedirectToAction("Index");
+        }
     }
 }
