@@ -96,5 +96,46 @@ namespace BulkyBook.Web.Controllers
             // Redirect to Index action (Category list)
             return RedirectToAction("Index");
         }
+
+        // GET
+        public IActionResult Delete(int? id)
+        {
+            // Validate if id is null or zero
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            // Get category by id from database
+            var category = _context.Categories.Find(id);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return View(category);
+        }
+
+        // POST
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? id)
+        {
+            // Find the category by id
+            var category = _context.Categories.Find(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+            // Remove category
+            _context.Categories.Remove(category);
+
+            // Save the removed category to database
+            _context.SaveChanges();
+
+            // Redirect to Index action (Category list)
+            return RedirectToAction("Index");
+        }
     }
 }
