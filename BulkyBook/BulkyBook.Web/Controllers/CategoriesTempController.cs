@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BulkyBook.DataAccess;
+using BulkyBook.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BulkyBook.Web.Data;
-using BulkyBook.Web.Models;
 
 namespace BulkyBook.Web.Controllers
 {
@@ -22,7 +17,7 @@ namespace BulkyBook.Web.Controllers
         // GET: CategoriesTemp
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Categories.ToListAsync());
+            return View(await _context.Categories.ToListAsync());
         }
 
         // GET: CategoriesTemp/Details/5
@@ -148,14 +143,14 @@ namespace BulkyBook.Web.Controllers
             {
                 _context.Categories.Remove(category);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CategoryExists(int id)
         {
-          return _context.Categories.Any(e => e.Id == id);
+            return _context.Categories.Any(e => e.Id == id);
         }
     }
 }
