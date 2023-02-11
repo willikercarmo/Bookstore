@@ -7,16 +7,16 @@ namespace BulkyBook.Web.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryRepository _context;
+        private readonly IUnitOfWork _context;
 
-        public CategoryController(ICategoryRepository context)
+        public CategoryController(IUnitOfWork context)
         {
             _context = context;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Category> objCategoryList = _context.GetAll();
+            IEnumerable<Category> objCategoryList = _context.Category.GetAll();
             return View(objCategoryList);
         }
 
@@ -42,7 +42,7 @@ namespace BulkyBook.Web.Controllers
             if (!ModelState.IsValid) return View(category);
 
             // Add the new category
-            _context.Add(category);
+            _context.Category.Add(category);
 
             // Save the new category to database
             _context.Save();
@@ -65,7 +65,7 @@ namespace BulkyBook.Web.Controllers
 
             // Get category by id from database
             // var categoryFind = _context.Categories.Find(id);
-            var categoryFirst = _context.GetFirstOrDefault(c => c.Id == id);
+            var categoryFirst = _context.Category.GetFirstOrDefault(c => c.Id == id);
             //var categorySingle = _context.Categories.SingleOrDefault(c => c.Id == id);
 
             if (categoryFirst == null)
@@ -92,7 +92,7 @@ namespace BulkyBook.Web.Controllers
             if (!ModelState.IsValid) return View(category);
 
             // Update the new category
-            _context.Update(category);
+            _context.Category.Update(category);
 
             // Save the update category to database
             _context.Save();
@@ -114,7 +114,7 @@ namespace BulkyBook.Web.Controllers
             }
 
             // Get category by id from database
-            var categoryFirst = _context.GetFirstOrDefault(c => c.Id == id);
+            var categoryFirst = _context.Category.GetFirstOrDefault(c => c.Id == id);
 
             if (categoryFirst == null)
             {
@@ -130,13 +130,13 @@ namespace BulkyBook.Web.Controllers
         public IActionResult DeletePost(int? id)
         {
             // Find the category by id
-            var categoryFirst = _context.GetFirstOrDefault(c => c.Id == id);
+            var categoryFirst = _context.Category.GetFirstOrDefault(c => c.Id == id);
             if (categoryFirst == null)
             {
                 return NotFound();
             }
             // Remove category
-            _context.Remove(categoryFirst);
+            _context.Category.Remove(categoryFirst);
 
             // Save the removed category to database
             _context.Save();
