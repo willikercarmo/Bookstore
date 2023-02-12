@@ -12,5 +12,6 @@ namespace BulkyBook.DataAccess
 
         // Set table names in the database
         public DbSet<Category> Categories { get; set; }
+        public DbSet<CoverType> CoverTypes { get; set; }
     }
 }
