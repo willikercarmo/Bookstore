@@ -23,6 +23,17 @@
                 AddProduct("Fantasy", _random.Next(1, 12), new DateTime(2023, _random.Next(1, 12), _random.Next(1, 9)));
                 await _context.SaveChangesAsync();
             }
+            if (!_context.CoverTypes.Any())
+            {
+                AddCoverType("Hard Cover");
+                AddCoverType("Soft Cover");
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        private void AddCoverType(string name)
+        {
+            _context.CoverTypes.Add(new Models.CoverType { Name = name });
         }
 
         private void AddProduct(string name, int displayOrder, DateTime createdDateTime)
