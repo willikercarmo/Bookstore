@@ -77,15 +77,22 @@ namespace BulkyBook.Web.Areas.Admin.Controllers
             {
                 if (file != null)
                 {
+                    // Get wwwroot path
                     string wwwRootPath = _hostEnvironment.WebRootPath;
+                    // Set a guid to file name
                     string fileName = Guid.NewGuid().ToString();
+                    // Combine the wwwroot path + file name generated
                     var upload = Path.Combine(wwwRootPath, @"images\products");
+                    // Get the extension file
                     var extension = Path.GetExtension(file.FileName);
 
+                    // Open the FileStream
                     using (var fileStream = new FileStream(Path.Combine(upload, fileName + extension), FileMode.Create))
                     {
+                        // Copy the file to wwwroot
                         file.CopyTo(fileStream);
                     }
+                    // Populate the ImageUrl property with location
                     model.Product.ImageUrl = @"\images\products" + fileName + extension;
                 }
 
