@@ -55,5 +55,19 @@ namespace BulkyBook.Web.Areas.Admin.Controllers
 
             return View(model);
         }
+
+        // POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(ProductViewModel model, IFormFile file)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            return RedirectToAction("Index");
+        }
+
     }
 }
