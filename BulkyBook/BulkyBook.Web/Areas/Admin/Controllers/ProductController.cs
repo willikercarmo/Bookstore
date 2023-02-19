@@ -41,7 +41,7 @@ namespace BulkyBook.Web.Areas.Admin.Controllers
             {
                 // Create product
                 ViewBag.CategoryList = categoryList;
-                ViewBag.CoverTypeList = coverTypeList;
+                ViewData["CoverTypeList"] = coverTypeList;
                 return View(product);
             }
             else
