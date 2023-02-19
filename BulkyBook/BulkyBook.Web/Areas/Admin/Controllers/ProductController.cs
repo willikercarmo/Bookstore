@@ -109,7 +109,7 @@ namespace BulkyBook.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var productList = _context.Product.GetAll();
+            var productList = _context.Product.GetAll(includeProperties:"Category,CoverType");
             return Json(new { data = productList });
         }
         #endregion
