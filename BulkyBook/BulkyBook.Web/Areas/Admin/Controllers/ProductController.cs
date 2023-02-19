@@ -32,7 +32,7 @@ namespace BulkyBook.Web.Areas.Admin.Controllers
                 {
                     Title = "Microsoft Word",
                     Author = "Bill Gates",
-                    Description= "Description",
+                    Description = "Description",
                     ISBN = "ISBN",
                     ListPrice = 10,
                     Price = 30,
@@ -105,5 +105,13 @@ namespace BulkyBook.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        #region API CALLS
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var productList = _context.Product.GetAll();
+            return Json(new { data = productList });
+        }
+        #endregion
     }
 }
